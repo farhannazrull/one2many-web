@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One2Many - Creative Solutions</title>
+    <style>
+        @font-face {
+            font-family: 'Product Sans';
+            font-style: normal;
+            font-weight: 500;
+            src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/productsans/v5/HYvgU2fE2nRJvZ5JFAumwegdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Product Sans', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 100px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.2);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #f5f5f5;
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 26px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 45px;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            background-color: #8a3cff;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #7a2bcf;
+            transform: translateY(-3px);
+        }
+
+        .start-project {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .start-project:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .about-us, .services, .portfolio, .blog, .contact, .testimonials {
+            padding: 70px 20px;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #8a3cff;
+        }
+
+        .service-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .service {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .service:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-5px);
+        }
+
+        .portfolio-grid, .blog-posts {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .portfolio-item, .blog-post {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .portfolio-item:hover, .blog-post:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-5px);
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact form input,
+        .contact form textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .contact form button {
+            padding: 15px;
+            background-color: #8a3cff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .contact form button:hover {
+            background-color: #7a2bcf;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonials-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .testimonial {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-list, .portfolio-grid, .blog-posts {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service, .portfolio-item, .blog-post {
+                max-width: 90%;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="navbar">
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <div class="logo">
+                    <img src="O2M.png" alt="One2Many">
+                </div>
+                <a href="#blog">Blog</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#contact" class="start-project">Start a Project</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Creative Solutions for Your Digital Needs</h1>
+                <p>Empowering businesses with innovative design and development.</p>
+                <a href="#contact" class="cta-button">Start a Project</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-us section">
+            <h2>About Us</h2>
+            <p>At One2Many, we are a team of passionate creatives dedicated to delivering exceptional design and digital solutions. Our mission is to help businesses of all sizes thrive in the digital landscape. We believe that great design should be accessible to everyone, and we work closely with our clients to understand their needs and bring their visions to life.</p>
+            <p>With a focus on quality, innovation, and customer satisfaction, we pride ourselves on our ability to create tailored solutions that not only meet but exceed our clients' expectations. Whether it's graphic design, video editing, content writing, or UI/UX design, our team has the expertise to deliver outstanding results.</p>
+            <p>Join us on this journey of creativity and innovation, and let's build something amazing together!</p>
+        </section>
+
+        <section id="services" class="services section">
+            <h2>Our Services</h2>
+            <div class="service-list">
+                <div class="service">
+                    <h3>Graphic Design</h3>
+                    <p>Creative and professional designs tailored to your brand.</p>
+                </div>
+                <div class="service">
+                    <h3>Video Editing</h3>
+                    <p>High-quality video editing to enhance your visual content.</p>
+                </div>
+                <div class="service">
+                    <h3>Content Writing</h3>
+                    <p>Engaging content that speaks to your audience.</p>
+                </div>
+                <div class="service">
+                    <h3>UI/UX Design</h3>
+                    <p>Intuitive and user-friendly interfaces for your applications.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio section">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <h3>Project 1</h3>
+                    <p>A brief description of Project 1.</p>
+                </div>
+                <div class="portfolio-item">
+                    <h3>Project 2</h3>
+                    <p>A brief description of Project 2.</p>
+                </div>
+                <div class="portfolio-item">
+                    <h3>Project 3</h3>
+                    <p>A brief description of Project 3.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="blog section">
+            <h2>Blog</h2>
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <h3>Blog Post 1</h3>
+                    <p>A brief summary of Blog Post 1.</p>
+                </div>
+                <div class="blog-post">
+                    <h3>Blog Post 2</h3>
+                    <p>A brief summary of Blog Post 2.</p>
+                </div>
+                <div class="blog-post">
+                    <h3>Blog Post 3</h3>
+                    <p>A brief summary of Blog Post 3.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials section">
+            <h2>Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p>"One2Many provided exceptional service!"</p>
+                    <strong>- Client A</strong>
+                </div>
+                <div class="testimonial">
+                    <p>"Their designs are creative and unique!"</p>
+                    <strong>- Client B</strong>
+                </div>
+                <div class="testimonial">
+                    <p>"I highly recommend One2Many for any project."</p>
+                    <strong>- Client C</strong>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact section">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 One2Many. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll('.section');
+            const options = {
+                root: null,
+                threshold: 0.1,
+                rootMargin: '0px'
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
